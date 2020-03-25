@@ -43,7 +43,7 @@ func (w TogglWrapper) getProjectName(projectId int64) string {
 
 	resp, err := w.client.Do(req)
 	if err != nil {
-		log.Fatalf("Error sending request for project: %s",err)
+		log.Fatalf("Error sending request for project: %s", err)
 	}
 	defer resp.Body.Close()
 
@@ -68,7 +68,7 @@ func (w TogglWrapper) CurrentTimer() Timer {
 
 	resp, err := w.client.Do(req)
 	if err != nil {
-		log.Fatalf("Error sending request for current timer: %s",err)
+		log.Fatalf("Error sending request for current timer: %s", err)
 	}
 	defer resp.Body.Close()
 
@@ -101,7 +101,7 @@ func (w TogglWrapper) CurrentTimer() Timer {
 		tags = append(tags, string(value))
 	}, "data", "tags")
 	if err != nil {
-		log.Fatalf("Error iterating through tags array in JSON of current timer: %s",err)
+		log.Fatalf("Error iterating through tags array in JSON of current timer: %s", err)
 	}
 
 	runningTimer := Timer{

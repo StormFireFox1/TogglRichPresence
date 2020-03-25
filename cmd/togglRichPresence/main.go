@@ -38,7 +38,7 @@ func main() {
 	}
 
 	app := &cli.App{
-		Flags:  flags,
+		Flags: flags,
 		Commands: []*cli.Command{
 			{
 				Name:    "sync",
@@ -66,8 +66,8 @@ func main() {
 			{
 				Name:    "set",
 				Aliases: []string{"a"},
-				Usage:   "Stops current timer, sets a new Toggl timer to the provided `DESCRIPTION`, `PROJECT`" +
-						 "and `DETAILS`, and also sets the current Rich Presence activity.",
+				Usage: "Stops current timer, sets a new Toggl timer to the provided `DESCRIPTION`, `PROJECT`" +
+					"and `DETAILS`, and also sets the current Rich Presence activity.",
 				Action: func(c *cli.Context) error {
 					log.Fatal("Not yet implemented!")
 					return nil
