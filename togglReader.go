@@ -35,7 +35,7 @@ func InitializeTogglWrapper(apiKey string) TogglWrapper {
 }
 
 func (w TogglWrapper) getProjectName(projectId int64) string {
-	req, _ := http.NewRequest("GET", "https://www.toggl.com/api/v8/projects" + strconv.Itoa(int(projectId)), nil)
+	req, _ := http.NewRequest("GET", "https://www.toggl.com/api/v8/projects/"+strconv.Itoa(int(projectId)), nil)
 	req.SetBasicAuth(w.apiKey, "api_token")
 
 	req.Header.Set("Accept", "application/json")
@@ -142,7 +142,7 @@ func (w TogglWrapper) currentTimerID() int64 {
 
 func (w TogglWrapper) StopTimer() {
 	projectId := w.currentTimerID()
-	req, _ := http.NewRequest("PUT", "https://www.toggl.com/api/v8/time_entries/" + strconv.Itoa(int(projectId)) + "/stop", nil)
+	req, _ := http.NewRequest("PUT", "https://www.toggl.com/api/v8/time_entries/"+strconv.Itoa(int(projectId))+"/stop", nil)
 	req.SetBasicAuth(w.apiKey, "api_token")
 
 	req.Header.Set("Accept", "application/json")

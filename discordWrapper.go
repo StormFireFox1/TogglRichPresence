@@ -25,8 +25,8 @@ func InitializeDiscordWrapper(appId string) DiscordWrapper {
 func (w DiscordWrapper) SetActivity(description, project string) {
 	t := time.Now()
 	w.currentActivity = client.Activity{
-		Details:	project,
-		State:      description,
+		Details: project,
+		State:   description,
 		Timestamps: &client.Timestamps{
 			Start: &t,
 		},
