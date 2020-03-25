@@ -14,7 +14,7 @@ import "github.com/StormFireFox1/TogglRichPresence"
 
 If you don't want to develop, and just want to use it, `go get` the binary package, and it will be installed in your PATH:
 ```shell
-$ go get github.com/StormFireFox1/TogglRichPresence/cmd"
+$ go get github.com/StormFireFox1/TogglRichPresence/cmd/togglRichPresence"
 ```
 
 ## Configuration
@@ -55,7 +55,7 @@ Alternatively, set the above parameters as environment variables.
 
 While the command is running, it will automatically sync your most recent Toggl timer with
 Discord Rich Presence. It will display the description of the time entry, the project
-under the format "@ProjectName" and it will also display tags under the format "#tag1 #tag2 ..." 
+under the format "@ProjectName" and it will also display tags under the format "#tag1 #tag2 ..."
 
 Additionally, a random tag is chosen in order to select an app icon to be displayed
-during the 
+during the
