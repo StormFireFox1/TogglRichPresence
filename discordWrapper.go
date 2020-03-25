@@ -49,7 +49,7 @@ func (w DiscordWrapper) RefreshRichPresenceToggl(t TogglWrapper) {
 	w.currentActivity = client.Activity{
 		Details:    timeEntry.description,
 		LargeImage: iconId,
-		SmallImage: iconId,
+		LargeText: iconId,
 		State:      "@" + timeEntry.project + " " + tags,
 		Timestamps: &client.Timestamps{
 			Start: &timeEntry.startTime,
