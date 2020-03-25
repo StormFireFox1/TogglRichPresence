@@ -1,0 +1,8 @@
+github.com/ananagame/rich-go v0.0.0-20200319172754-527649f3d36d h1:A6eLJwlu+zpUBm+iTD9JFT9m3JX0SIALnSutn3LymTs=
+github.com/ananagame/rich-go v0.0.0-20200319172754-527649f3d36d/go.mod h1:U9YxCfeNzWcDUs4O8lQfUyz9txKHTojVykpQicaZhyU=
+github.com/buger/jsonparser v0.0.0-20200322175846-f7e751efca13 h1:+qUNY4VRkEH46bLUwxCyUU+iOGJMQBVibAaYzWiwWcg=
+github.com/buger/jsonparser v0.0.0-20200322175846-f7e751efca13/go.mod h1:tgcrVJ81GPSF0mz+0nu1Xaz0fazGPrmmJfJtxjbHhUQ=
+github.com/hugolgst/rich-go v0.0.0-20200319172754-527649f3d36d h1:HYFRni7r+C/z96mu/Ur+JZrcnsCvlA8WEFBEhyGpXH8=
+github.com/hugolgst/rich-go v0.0.0-20200319172754-527649f3d36d/go.mod h1:J5UWekI/HHIt5ID+GVPAW+M19kxXLTFnAdTGDl4mRF0=
+gopkg.in/natefinch/npipe.v2 v2.0.0-20160621034901-c1b8fa8bdcce h1:+JknDZhAj8YMt7GC73Ei8pv4MzjDUNPHgQWJdtMAaDU=
+gopkg.in/natefinch/npipe.v2 v2.0.0-20160621034901-c1b8fa8bdcce/go.mod h1:5AcXVHNjg+BDxry382+8OKon8SEWiKktQR07RKPsv1c=
