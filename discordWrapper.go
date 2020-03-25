@@ -11,12 +11,14 @@ type DiscordWrapper struct {
 	appId           string
 }
 
-func (w DiscordWrapper) Initialize(appId string) {
+func InitializeDiscordWrapper(appId string) DiscordWrapper {
+	var w DiscordWrapper
 	w.appId = appId
 	err := client.Login(w.appId)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error logging in to Discord: %s. Are you sure Discord is running?", err)
 	}
+	return w
 }
 
 func (w DiscordWrapper) SetActivity(description, project string) {
@@ -30,7 +32,7 @@ func (w DiscordWrapper) SetActivity(description, project string) {
 	}
 	err := client.SetActivity(w.currentActivity)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error sending activity to Discord: %s", err)
 	}
 }
 
@@ -45,6 +47,6 @@ func (w DiscordWrapper) RefreshRichPresenceToggl(t TogglWrapper) {
 	}
 	err := client.SetActivity(w.currentActivity)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error sending activity to Discord: %s", err)
 	}
 }

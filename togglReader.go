@@ -25,11 +25,13 @@ type Timer struct {
 //
 // Adds a client struct to the TogglWrapper, and sets
 // the API key for Toggl.
-func (w TogglWrapper) Initialize(apiKey string) {
+func InitializeTogglWrapper(apiKey string) TogglWrapper {
+	var w TogglWrapper
 	w.client = http.Client{
 		Timeout: 10 * time.Second,
 	}
 	w.apiKey = apiKey
+	return w
 }
 
 func (w TogglWrapper) getProjectName(projectId int64) string {
@@ -41,18 +43,18 @@ func (w TogglWrapper) getProjectName(projectId int64) string {
 
 	resp, err := w.client.Do(req)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error sending request for project: %s",err)
 	}
 	defer resp.Body.Close()
 
 	requestString, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error reading request body of project: %s", err)
 	}
 
 	name, err := jsonparser.GetString(requestString, "data", "name")
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error extracting name of project: %s", err)
 	}
 	return name
 }
@@ -66,32 +68,32 @@ func (w TogglWrapper) CurrentTimer() Timer {
 
 	resp, err := w.client.Do(req)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error sending request for current timer: %s",err)
 	}
 	defer resp.Body.Close()
 
 	requestString, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error reading request body of current timer: %s", err)
 	}
 
 	description, err := jsonparser.GetString(requestString, "data", "description")
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error extracting description of timer entry: %s", err)
 	}
 
 	projectId, err := jsonparser.GetInt(requestString, "data", "pid")
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error extracting project ID of timer entry: %s", err)
 	}
 
 	startTimeString, err := jsonparser.GetString(requestString, "data", "start")
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error extracting start time of timer entry: %s", err)
 	}
-	startTime, err := time.Parse("time.RFC3339", startTimeString)
+	startTime, err := time.Parse(time.RFC3339, startTimeString)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error parsing time string from time entry: %s", err)
 	}
 
 	tags := make([]string, 0)
@@ -99,7 +101,7 @@ func (w TogglWrapper) CurrentTimer() Timer {
 		tags = append(tags, string(value))
 	}, "data", "tags")
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error iterating through tags array in JSON of current timer: %s",err)
 	}
 
 	runningTimer := Timer{
@@ -121,18 +123,18 @@ func (w TogglWrapper) currentTimerID() int64 {
 
 	resp, err := w.client.Do(req)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error sending request for current timer ID: %s", err)
 	}
 	defer resp.Body.Close()
 
 	requestString, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error reading request body of current timer: %s", err)
 	}
 
 	currentTimerID, err := jsonparser.GetInt(requestString, "data", "id")
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error extracting ID of current timer: %s", err)
 	}
 
 	return currentTimerID
@@ -148,7 +150,7 @@ func (w TogglWrapper) StopTimer() {
 
 	resp, err := w.client.Do(req)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error sending request to stop timer: %s", err)
 	}
 	defer resp.Body.Close()
 }
