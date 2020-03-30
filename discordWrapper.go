@@ -39,6 +39,9 @@ func (w DiscordWrapper) SetActivity(description, project string) {
 
 func (w DiscordWrapper) RefreshRichPresenceToggl(t TogglWrapper) {
 	timeEntry := t.CurrentTimer()
+    if (timeEntry.description == "") {
+        return
+    }
 	tags := ""
 	if len(timeEntry.tags) != 0 {
 		for _, tag := range timeEntry.tags {

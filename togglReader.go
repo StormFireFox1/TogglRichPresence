@@ -79,7 +79,12 @@ func (w TogglWrapper) CurrentTimer() Timer {
 
 	description, err := jsonparser.GetString(requestString, "data", "description")
 	if err != nil {
-		log.Fatalf("Error extracting description of timer entry: %s", err)
+        return Timer{
+		startTime:   time.Now(),
+		description: "",
+		project:     "",
+		tags:        []string{""},
+        }
 	}
 
 	projectId, err := jsonparser.GetInt(requestString, "data", "pid")
