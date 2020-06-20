@@ -13,8 +13,8 @@ import "github.com/StormFireFox1/TogglRichPresence"
 ```
 
 If you don't want to develop, and just want to use it, `go get` the binary package, and it will be installed in your PATH:
-```shell
-$ go get github.com/StormFireFox1/TogglRichPresence/cmd/togglRichPresence"
+```bash
+$ go get "github.com/StormFireFox1/TogglRichPresence/cmd/togglRichPresence"
 ```
 
 ## Configuration
@@ -58,4 +58,4 @@ Discord Rich Presence. It will display the description of the time entry, the pr
 under the format "@ProjectName" and it will also display tags under the format "#tag1 #tag2 ..."
 
 Additionally, a random tag is chosen in order to select an app icon to be displayed
-during the
+for the Rich Presence of the time entry.
