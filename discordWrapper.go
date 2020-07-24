@@ -45,7 +45,9 @@ func (w DiscordWrapper) RefreshRichPresenceToggl(t TogglWrapper) {
 	tags := ""
 	if len(timeEntry.tags) != 0 {
 		for _, tag := range timeEntry.tags {
-			tags += "#" + tag + " "
+			if (tag != "") {
+				tags += "#" + tag + " "
+			}
 		}
 	}
 	iconId := timeEntry.tags[rand.Intn(len(timeEntry.tags))]
