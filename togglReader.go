@@ -101,12 +101,14 @@ func (w TogglWrapper) CurrentTimer() Timer {
 		log.Fatalf("Error parsing time string from time entry: %s", err)
 	}
 
-	tags := make([]string, 0)
+	var tags []string
 	_, err = jsonparser.ArrayEach(requestString, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
 		tags = append(tags, string(value))
 	}, "data", "tags")
-	if err != nil {
+	if err != nil && err != jsonparser.KeyPathNotFoundError {
 		log.Fatalf("Error iterating through tags array in JSON of current timer: %s", err)
+	} else if err == jsonparser.KeyPathNotFoundError {
+		tags = nil;
 	}
 
 	runningTimer := Timer{

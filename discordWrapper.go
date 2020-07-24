@@ -1,10 +1,11 @@
 package TogglRichPresence
 
 import (
-	"github.com/hugolgst/rich-go/client"
 	"log"
 	"math/rand"
 	"time"
+
+	"github.com/hugolgst/rich-go/client"
 )
 
 type DiscordWrapper struct {
@@ -39,16 +40,17 @@ func (w DiscordWrapper) SetActivity(description, project string) {
 
 func (w DiscordWrapper) RefreshRichPresenceToggl(t TogglWrapper) {
 	timeEntry := t.CurrentTimer()
-    if (timeEntry.description == "") {
-        return
-    }
+	if timeEntry.description == "" {
+		return
+	}
 	tags := ""
+	var iconId string
 	if len(timeEntry.tags) != 0 {
 		for _, tag := range timeEntry.tags {
 			tags += "#" + tag + " "
 		}
+		iconId = timeEntry.tags[rand.Intn(len(timeEntry.tags))]
 	}
-	iconId := timeEntry.tags[rand.Intn(len(timeEntry.tags))]
 	w.currentActivity = client.Activity{
 		Details:    timeEntry.description,
 		LargeImage: iconId,
