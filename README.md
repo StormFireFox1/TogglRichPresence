@@ -26,6 +26,16 @@ The library requires a bit of configuration on your part, preferably done using
 environment variables. Alternatively, if the environment variables are not set,
 TogglRichPresence reads command-line flags. Otherwise, the binary fails.
 
+There are a few extra ones that are optional, but useful:
+- `DEFAULT_ICON_ID`: The default icon to display in TogglRichPresence on empty
+  timer entries. By default, TogglRichPresence displays no image if the timer
+  entry does not have any tags that could be used for Rich Presence icons.
+  Assign a string here to change that. The string must match the name of the
+  Rich Presence icon available in the Discord Developer Portal.
+- `DEFAULT_REFRESH_INTERVAL`: By default, TogglRichPresence refreshes the Rich
+  Presence information every 10 seconds. Use this environment variable to change
+  the refresh interval. Default is 10 seconds.
+
 ## Usage
 
 The most important thing is to have Discord running in the background. Sadly,
@@ -64,17 +74,3 @@ under the format "#tag1 #tag2 ..."
 
 Additionally, a random tag is chosen in order to select an app icon to be
 displayed for the Rich Presence of the time entry.
-
-## Configuration
-
-The TogglRichPresence CLI takes environment variables to allow for configuration, these
-are a few extra ones that are optional, but useful:
-
-- `DEFAULT_ICON_ID`: The default icon to display in TogglRichPresence on empty
-  timer entries. By default, TogglRichPresence displays no image if the timer
-  entry does not have any tags that could be used for Rich Presence icons.
-  Assign a string here to change that. The string must match the name of the
-  Rich Presence icon available in the Discord Developer Portal.
-- `DEFAULT_REFRESH_INTERVAL`: By default, TogglRichPresence refreshes the Rich
-  Presence information every 10 seconds. Use this environment variable to change
-  the refresh interval. Default is 10 seconds.
