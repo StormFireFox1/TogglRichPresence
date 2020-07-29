@@ -11,11 +11,13 @@ import (
 type DiscordWrapper struct {
 	currentActivity client.Activity
 	appId           string
+	defaultIcon     string
 }
 
-func InitializeDiscordWrapper(appId string) DiscordWrapper {
+func InitializeDiscordWrapper(appId string, defaultIcon string) DiscordWrapper {
 	var w DiscordWrapper
 	w.appId = appId
+	w.defaultIcon = defaultIcon
 	err := client.Login(w.appId)
 	if err != nil {
 		log.Fatalf("Error logging in to Discord: %s. Are you sure Discord is running?", err)
@@ -53,7 +55,7 @@ func (w DiscordWrapper) RefreshRichPresenceToggl(t TogglWrapper) {
 		return
 	}
 	tags := ""
-	var iconId string
+	iconId := w.defaultIcon
 	if len(timeEntry.tags) != 0 {
 		for _, tag := range timeEntry.tags {
 			tags += "#" + tag + " "

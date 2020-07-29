@@ -30,6 +30,12 @@ func main() {
 			Required: true,
 		},
 		&cli.StringFlag{
+			Name:     "defaultIconId",
+			Value:    "",
+			Usage:    "Default name for icon to use if no tags present in time entry. Empty by default.",
+			EnvVars:  []string{"DEFAULT_ICON_ID"},
+		},
+		&cli.StringFlag{
 			Name:    "config, c",
 			Value:   "~/.config/TogglRichPresence/config.json",
 			Usage:   "Load configuration from `FILE`",
@@ -53,7 +59,7 @@ func main() {
 						os.Exit(1)
 					}()
 
-					discordWrapper := TogglRichPresence.InitializeDiscordWrapper(c.String("discordAppId"))
+					discordWrapper := TogglRichPresence.InitializeDiscordWrapper(c.String("discordAppId"), c.String("defaultIconId"))
 					togglWrapper := TogglRichPresence.InitializeTogglWrapper(c.String("togglApiKey"))
 
 					log.Print("Syncing Toggl and Discord Rich Presence!")
