@@ -1,8 +1,8 @@
 package TogglRichPresence
 
 import (
-	"github.com/buger/jsonparser"
 	"errors"
+	"github.com/buger/jsonparser"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -81,7 +81,7 @@ func (w TogglWrapper) CurrentTimer() (Timer, error) {
 
 	description, err := jsonparser.GetString(requestString, "data", "description")
 	if err != nil {
-        return currentTimer, errors.New("No timer currently running!")
+		return currentTimer, errors.New("No timer currently running!")
 	}
 
 	projectId, err := jsonparser.GetInt(requestString, "data", "pid")
@@ -105,7 +105,7 @@ func (w TogglWrapper) CurrentTimer() (Timer, error) {
 	if err != nil && err != jsonparser.KeyPathNotFoundError {
 		log.Fatalf("Error iterating through tags array in JSON of current timer: %s", err)
 	} else if err == jsonparser.KeyPathNotFoundError {
-		tags = nil;
+		tags = nil
 	}
 
 	runningTimer := Timer{

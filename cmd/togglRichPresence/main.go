@@ -30,10 +30,16 @@ func main() {
 			Required: true,
 		},
 		&cli.StringFlag{
-			Name:     "defaultIconId",
-			Value:    "",
-			Usage:    "Default name for icon to use if no tags present in time entry. Empty by default.",
-			EnvVars:  []string{"DEFAULT_ICON_ID"},
+			Name:    "defaultIconId",
+			Value:   "",
+			Usage:   "Default name for icon to use if no tags present in time entry. Empty by default.",
+			EnvVars: []string{"DEFAULT_ICON_ID"},
+		},
+		&cli.IntFlag{
+			Name:    "defaultRefreshInterval",
+			Value:   10,
+			Usage:   "Default refresh interval for TogglRichPresence to refresh the Rich Presence with the Toggl API. Default is 10 seconds.",
+			EnvVars: []string{"DEFAULT_REFRESH_INTERVAL"},
 		},
 		&cli.StringFlag{
 			Name:    "config, c",
@@ -65,7 +71,7 @@ func main() {
 					log.Print("Syncing Toggl and Discord Rich Presence!")
 					for {
 						discordWrapper.RefreshRichPresenceToggl(togglWrapper)
-						time.Sleep(60 * time.Second)
+						time.Sleep(time.Duration(c.Int("defaultRefreshInterval")) * time.Second)
 					}
 				},
 			},

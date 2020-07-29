@@ -65,7 +65,16 @@ under the format "#tag1 #tag2 ..."
 Additionally, a random tag is chosen in order to select an app icon to be
 displayed for the Rich Presence of the time entry.
 
-You do have the option to select a default icon to be displayed if no icons are
-available for your provided tags by setting the environment variable
-`DEFAULT_ICON_ID`. By default, no icon is displayed if no matching tags are
-found.
+## Configuration
+
+The TogglRichPresence CLI takes environment variables to allow for configuration, these
+are a few extra ones that are optional, but useful:
+
+- `DEFAULT_ICON_ID`: The default icon to display in TogglRichPresence on empty
+  timer entries. By default, TogglRichPresence displays no image if the timer
+  entry does not have any tags that could be used for Rich Presence icons.
+  Assign a string here to change that. The string must match the name of the
+  Rich Presence icon available in the Discord Developer Portal.
+- `DEFAULT_REFRESH_INTERVAL`: By default, TogglRichPresence refreshes the Rich
+  Presence information every 10 seconds. Use this environment variable to change
+  the refresh interval. Default is 10 seconds.
