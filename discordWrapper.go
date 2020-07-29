@@ -23,6 +23,14 @@ func InitializeDiscordWrapper(appId string) DiscordWrapper {
 	return w
 }
 
+func (w DiscordWrapper) RestartWrapper() {
+	client.Logout()
+	err := client.Login(w.appId)
+	if err != nil {
+		log.Fatalf("Error restarting Discord: %s", err)
+	}
+}
+
 func (w DiscordWrapper) SetActivity(description, project string) {
 	t := time.Now()
 	w.currentActivity = client.Activity{
@@ -39,8 +47,9 @@ func (w DiscordWrapper) SetActivity(description, project string) {
 }
 
 func (w DiscordWrapper) RefreshRichPresenceToggl(t TogglWrapper) {
-	timeEntry := t.CurrentTimer()
-	if timeEntry.description == "" {
+	timeEntry, err := t.CurrentTimer()
+	if err != nil {
+		w.RestartWrapper()
 		return
 	}
 	tags := ""
@@ -60,7 +69,7 @@ func (w DiscordWrapper) RefreshRichPresenceToggl(t TogglWrapper) {
 			Start: &timeEntry.startTime,
 		},
 	}
-	err := client.SetActivity(w.currentActivity)
+	err = client.SetActivity(w.currentActivity)
 	if err != nil {
 		log.Fatalf("Error sending activity to Discord: %s", err)
 	}

@@ -2,6 +2,7 @@ package TogglRichPresence
 
 import (
 	"github.com/buger/jsonparser"
+	"errors"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -59,7 +60,8 @@ func (w TogglWrapper) getProjectName(projectId int64) string {
 	return name
 }
 
-func (w TogglWrapper) CurrentTimer() Timer {
+func (w TogglWrapper) CurrentTimer() (Timer, error) {
+	var currentTimer Timer
 	req, _ := http.NewRequest("GET", "https://www.toggl.com/api/v8/time_entries/current", nil)
 	req.SetBasicAuth(w.apiKey, "api_token")
 
@@ -79,12 +81,7 @@ func (w TogglWrapper) CurrentTimer() Timer {
 
 	description, err := jsonparser.GetString(requestString, "data", "description")
 	if err != nil {
-        return Timer{
-		startTime:   time.Now(),
-		description: "",
-		project:     "",
-		tags:        []string{""},
-        }
+        return currentTimer, errors.New("No timer currently running!")
 	}
 
 	projectId, err := jsonparser.GetInt(requestString, "data", "pid")
@@ -118,7 +115,7 @@ func (w TogglWrapper) CurrentTimer() Timer {
 		tags:        tags,
 	}
 
-	return runningTimer
+	return runningTimer, nil
 }
 
 func (w TogglWrapper) currentTimerID() int64 {
